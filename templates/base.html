@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma boutique</title>
+</head>
+<body>
+    <a href="{% url 'index' %}">
+        <h1>La boutique de Lucien</h1>
+    </a>
+    {% if user.is_authenticated %}
+        {{ user.username }}
+    <a href="{% url 'logout' %}">Se déconnecter</a>
+    {% else %}
+        <a href="{% url 'signup' %}">S'inscrire</a>
+        <a href="{% url 'login' %}">Se Connecter</a>
+    {% endif %}
+
+    {% if user.cart %}
+    <p>
+        <a href="{% url 'cart' %}">Voir le panier ({{user.cart.orders.count}})</a>
+    </p>
+    {% endif %}
+
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
